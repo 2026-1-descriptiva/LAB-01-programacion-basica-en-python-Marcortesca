@@ -15,3 +15,20 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+    with open('files/input/data.csv', 'r') as file:
+        lines = file.readlines()
+
+    letter_sums = {}
+
+    for line in lines:
+        columns = line.strip().split('\t')
+        letter = columns[0]
+        values = columns[4].split(',')
+        total = sum(int(value.strip().split(':')[-1]) for value in values if value.strip())
+        if letter not in letter_sums:
+            letter_sums[letter] = 0
+        letter_sums[letter] += total
+    
+    return dict(sorted(letter_sums.items()))
+
+print(pregunta_12())

@@ -16,3 +16,21 @@ def pregunta_11():
 
 
     """
+
+    with open('files/input/data.csv', 'r') as file:
+        lines = file.readlines()
+
+    letter_sums = {}
+
+    for line in lines:
+        columns = line.strip().split('\t')
+        value = int(columns[1])
+        letters = columns[3].split(',')
+        for letter in letters:
+            if letter not in letter_sums:
+                letter_sums[letter] = 0
+            letter_sums[letter] += value
+
+    return dict(sorted(letter_sums.items()))
+
+print(pregunta_11())

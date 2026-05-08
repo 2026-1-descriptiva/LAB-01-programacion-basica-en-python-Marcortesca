@@ -15,3 +15,18 @@ def pregunta_05():
     [('A', 9, 2), ('B', 9, 1), ('C', 9, 0), ('D', 8, 3), ('E', 9, 1)]
 
     """
+    min_max = {}
+    with open("files/input/data.csv", "r") as data:
+        for line in data:
+            if line.strip():
+                parts = line.split("\t")
+                letter = parts[0]
+                value = int(parts[1])
+                if letter not in min_max:
+                    min_max[letter] = (value, value)
+                else:
+                    current_min, current_max = min_max[letter]
+                    min_max[letter] = (min(current_min, value), max(current_max, value))
+    return sorted([(letter, max_val, min_val) for letter, (min_val, max_val) in min_max.items()])
+
+print(pregunta_05())

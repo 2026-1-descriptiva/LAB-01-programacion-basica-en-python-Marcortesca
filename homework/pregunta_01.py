@@ -14,3 +14,8 @@ def pregunta_01():
     214
 
     """
+    with open("files/input/data.csv", "r") as file:
+        total = sum(int(line.split("\t")[1]) for line in file if line.strip())
+    return total
+
+print(pregunta_01())
